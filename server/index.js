@@ -1,40 +1,39 @@
-const express = require('express');
-const cors = require('cors');
+import express from "express";
+import cookieParser from "cookie-parser";
+import connectDB from "./database/db.js";
+import dotenv from "dotenv";
+import userRoute from "./routes/user.route.js";
+import cors from "cors";
+import courseRoute from "./routes/course.route.js";
 
+dotenv.config();
+
+connectDB();
 const app = express();
+const PORT = 8080;
 
-// Middleware for JSON parsing
+// Middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // CORS configuration
-const allowedOrigins = ['https://lms-1-frontend-2.onrender.com']; // Add your frontend URL(s)
+const allowedOrigins = [
+  "https://lms-cgz0.onrender.com",
+  "https://lms-1-frontend-2.onrender.com"
+];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-};
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
-// Apply CORS middleware
-app.use(cors(corsOptions));
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
-
-// Example route
-app.post('/api/v1/user/login', (req, res) => {
-  // Example response
-  res.json({ message: 'Login route works!' });
-});
+// Routes
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/course", courseRoute);
 
 // Start server
-const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
