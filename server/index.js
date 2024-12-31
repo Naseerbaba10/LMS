@@ -16,16 +16,11 @@ const PORT = 8080;
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS configuration
-const allowedOrigins = [
-  "https://lms-cgz0.onrender.com",
-  "https://lms-1-frontend-2.onrender.com"
-];
-
+// CORS configuration to allow all origins
 app.use(
   cors({
-    origin: allowedOrigins,
-    credentials: true,
+    origin: '*', // Allow all origins
+    credentials: true, // If you need to include cookies in requests
   })
 );
 
