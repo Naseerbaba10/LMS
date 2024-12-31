@@ -14,7 +14,7 @@ import CourseTable from "./pages/admin/course/CourseTable";
 import AddCourse from "./pages/admin/course/AddCourse";
 import Course from "./pages/student/Course";
 import Html1 from "./pages/student/html1";
-import Css1 from "./pages/student/css1";
+import Css1 from "./pages/student/Css1";
 import JavaScript from "./pages/student/JavaScript";
 import React1 from "./pages/student/React1";
 import Tailwind from "./pages/student/Tailwind";
