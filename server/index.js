@@ -19,7 +19,7 @@ app.use(cookieParser());
 // CORS configuration to allow all origins
 app.use(
   cors({
-    origin: '*', // Allow all origins
+    origin: 'https://lms-1-frontend-2.onrender.com' || ' http://localhost:5173/' , // Allow all origins
     credentials: true, // If you need to include cookies in requests
   })
 );
